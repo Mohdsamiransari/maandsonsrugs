@@ -10,13 +10,11 @@ function SignInForm() {
 
   const handleSignIn: SubmitHandler<FieldValues> = async (data) => {
     try {
-      console.log(data.email, data.password);
 
       const response = await loginUser({
         email: data.email,
         password: data.password,
       });
-      console.log(response);
       localStorage.setItem("token", response.token);
       if (localStorage.getItem("token")) router.push("/dashboard");
     } catch (error) {

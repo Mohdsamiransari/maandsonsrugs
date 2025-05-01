@@ -75,10 +75,8 @@ function EditRugModal({ singleRugData }: { singleRugData: rugParams }) {
       rugCategory: selectedRugCategory,
       path: pathname,
     };
-    console.log("Form Data: ", formData);
 
     const response = await updateRug(formData);
-    console.log(response, "response");
     if (response.status === 200) {
       // router.push("/dashboard");
       alert("Rug updated successfully");

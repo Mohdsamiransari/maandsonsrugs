@@ -20,7 +20,6 @@ function DashboardRugsListing() {
     try {
       const response = await getAllRugs();
       setRugs(response.rugs);
-      console.log(response);
     } catch (error) {
       console.error("Error fetching rugs:", error);
     }

@@ -48,7 +48,6 @@ export async function createRug({
       throw new Error("Token is required");
     }
     verifyToken(token);
-    console.log(rugCode?.toString(), "rugCode");
 
     if (
       !rugName ||
@@ -120,6 +119,30 @@ export async function getAllRugs() {
       throw new Error(`Failed to get all rugs: ${error.message}`);
     }
     throw new Error("Failed to get all rugs due to an unknown error");
+  }
+}
+
+export async function getRugByCategory(category: string) {
+  try {
+    connectToDB();
+
+    if (!category) {
+      throw new Error("Category is required");
+    }
+
+    const rugs = await Rug.find({ rugCategory: category }).lean();
+
+    if (rugs.length === 0) {
+      return { message: "No rugs found in this category", rugs: [] };
+    }
+    const data = JSON.parse(JSON.stringify(rugs));
+
+    return { message: "Rugs fetched successfully", rugs: data };
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Failed to get rugs by category: ${error.message}`);
+    }
+    throw new Error("Failed to get rugs by category due to an unknown error");
   }
 }
 

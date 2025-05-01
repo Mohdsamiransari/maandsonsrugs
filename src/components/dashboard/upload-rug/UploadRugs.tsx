@@ -106,10 +106,8 @@ function UploadRugs() {
       rugMaterials: material,
     };
 
-    console.log(rugData, "rugData");
 
     createRug(rugData).then((response) => {
-      console.log(response);
       if (response) {
         alert("Rug created successfully");
         reset();
